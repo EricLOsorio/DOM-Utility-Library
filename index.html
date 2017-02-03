@@ -130,9 +130,6 @@
 				      	walker.push(document.createTreeWalker(toRemove[i],NodeFilter.SHOW_ELEMENT,null));
 				      };
 
-				      console.log(walker.length);
-
-
 				      for(var j=0;j<walker.length;j++){
 				      	while(walker[j].nextNode()){
 				      	  element=walker[j].currentNode;
