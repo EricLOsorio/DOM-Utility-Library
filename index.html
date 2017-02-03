@@ -37,13 +37,13 @@
                 'use strict';
 
                 //start search for ancestor at `startNode`
-                //the ancestor selector string is `potentialParentString`
+                //the ancestor selector string is `potentialAncestorString`
 
-				function getAncestorBySelector(startNode,potentialParentString){
+				function getAncestorBySelector(startNode,potentialAncestorString){
 				  
 				  var ancestor=startNode;
 
-				  while(ancestor!==null && ancestor!== document.querySelector(potentialParentString)){
+				  while(ancestor!==null && ancestor!== document.querySelector(potentialAncestorString)){
 				  	ancestor=ancestor.parentNode;
 				  };
 
@@ -51,7 +51,7 @@
 
 				}
 
-				//given a `chosenSelector` string find all possible siblings
+				//given a `chosenSelector` string find all its siblings
 
 				function getSiblingBySelector(selectorString){
 				  var 
@@ -71,6 +71,7 @@
 				}
 
 				//given a `newNode` it is inserted after the `nodeAfter`
+				//both arguments are actual NODES and not selector strings
 
 				function insertAfter(newNode, nodeAfter){
 				  var parent=nodeAfter.parentNode,
@@ -85,6 +86,7 @@
 
 				//A swap between `element` and `element2` is executed
 				//if successful, `true` is returned, otherwise `false` is returned
+				//both argurments are actual element nodes
 
 				function swapElements(element1, element2){
 				  var parent1=element1.parentElement,
@@ -108,20 +110,38 @@
 
                 }
 
-                //element selected by `cssSelector` is removed 
+                //element selected by `cssSelector` string is removed 
                 //all the elements that were removed is returned in array
 
                 function removeAll(cssSelector){
-				  var toRemove=document.querySelector(cssSelector),
-				      parent=toRemove.parentElement,
-				      removedElements=[toRemove],
-				      walker=document.createTreeWalker(toRemove,NodeFilter.SHOW_ELEMENT,null);
-	
-				  while(walker.nextNode()){
-				    removedElements.push(walker.currentNode);  	
-				  }; 
-				  parent.removeChild(toRemove); 
-				  return removedElements;  
+				  var toRemove=document.querySelectorAll(cssSelector),
+				      parent=[],
+				      walker=[],
+				      element=null,
+				      removedElements=[];
+
+				      for(var m=0;m<toRemove.length;m++){
+				        removedElements.push(toRemove[m]);
+				      };
+
+
+				      for(var i=0;i<toRemove.length;i++){
+				      	parent.push(toRemove[i].parentElement);
+				      	walker.push(document.createTreeWalker(toRemove[i],NodeFilter.SHOW_ELEMENT,null));
+				      };
+
+				      console.log(walker.length);
+
+
+				      for(var j=0;j<walker.length;j++){
+				      	while(walker[j].nextNode()){
+				      	  element=walker[j].currentNode;
+				      	  removedElements.push(element);
+				      	};
+				      	parent[j].removeChild(toRemove[j]);
+				      }
+
+				      return removedElements;
 
 				}
 
