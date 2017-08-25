@@ -1,0 +1,33 @@
+{
+  "name": "dom-utility-library",
+  "version": "1.0.0",
+  "description": "DOM manipulation functions",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EricLOsorio/DOM-Utility-Library.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EricLOsorio/DOM-Utility-Library/issues"
+  },
+  "homepage": "https://github.com/EricLOsorio/DOM-Utility-Library#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
+    "gulp": "^3.9.1",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-eslint": "^4.0.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-uglify": "^3.0.0",
+    "jshint": "^2.9.5",
+    "run-sequence": "^2.1.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
