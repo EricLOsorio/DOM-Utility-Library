@@ -6,12 +6,12 @@ window.onload = (function () {
 
 				function getAncestorBySelector(startNode,potentialAncestorString){
 				  
-				  var ancestor = startNode,
+				  let  ancestor = startNode,
 				      potentialAncestorNode = document.querySelector(potentialAncestorString);
 
 				  while(ancestor!==null && ancestor!== potentialAncestorNode){
 				  	ancestor=ancestor.parentNode;
-				  };
+				  }
 
 				  return ancestor;
 
@@ -21,37 +21,37 @@ window.onload = (function () {
 
 				function getSiblingBySelector(node, selectorString){ 
 
-				  var parentNode = node,
+				  let  parentNode = node,
 				      siblings = [],
 				      childrenIndex = 0,
 				      match = false;
 
 				  try {
-				    var chosenSelector = document.querySelector(selectorString),
+				    let  chosenSelector = document.querySelector(selectorString),
 				      parentChildrenList = Array.from(parentNode.children);				  	
-				  } catch (error){
-				  	  console.log(`${error}: Check the given node actually exists` )
-				  };
+				  
+					  while( childrenIndex < parentChildrenList.length && !match) {
 
+					    if(chosenSelector.isEqualNode(parentChildrenList[childrenIndex])){
+					  	   
+					  	   match = true;
 
-				  while( childrenIndex < parentChildrenList.length && !match) {
+					  	   parentChildrenList.splice(childrenIndex,1);
+					    }
 
-				    if(chosenSelector.isEqualNode(parentChildrenList[childrenIndex])){
-				  	   
-				  	   match = true;
+					    childrenIndex++;
 
-				  	   parentChildrenList.splice(childrenIndex,1);
-				    }
+					  }
 
-				    childrenIndex++;
+					  if(match){
+					    console.log(`Siblings Collection of given node: `, parentChildrenList);				  	
+					  } else {
+					  	console.log("The Node given is not the parent of given selector");
+					  }
 
-				  };
-
-				  if(match){
-				    console.log(`Siblings Collection of given node: `, parentChildrenList);				  	
-				  } else {
-				  	console.log("The Node given is not the parent of given selector");
-				  }
+					} catch (error){
+				  	  console.log(`${error}: Check the given node actually exists` );
+				  	}				  
 
 				}
 
@@ -59,7 +59,7 @@ window.onload = (function () {
 				//both arguments are actual NODES and not selector strings
 
 				function insertAfter(newNode, nodeAfter){
-				  var parent=nodeAfter.parentNode,
+				  let  parent=nodeAfter.parentNode,
 				      nodeBefore=nodeAfter.nextElementSibling;
 
 				      if(nodeBefore!==null){
@@ -76,7 +76,7 @@ window.onload = (function () {
 				//both argurments are actual element nodes
 
 				function swapElements(element1, element2){ 
-				  var parent1=element1.parentElement,
+				  let  parent1=element1.parentElement,
 				      parent2=element2.parentElement,
 				      afterElement1=element1.nextElementSibling,
 				      afterElement2=element2.nextElementSibling;
@@ -101,7 +101,7 @@ window.onload = (function () {
                 //all the elements that were removed are returned in array
 
                 function removeAll(cssSelector){
-				  var toRemove=Array.from(document.querySelectorAll(cssSelector));
+				  let  toRemove=Array.from(document.querySelectorAll(cssSelector));
 
 				      toRemove.forEach( (node) =>{
 				      	node.parentNode.removeChild(node);
